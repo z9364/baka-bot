@@ -13,7 +13,7 @@ public class Main extends JavaPlugin {
     public static Main INSTANCE = new Main();
 
     private Main(){
-        super(new JvmPluginDescriptionBuilder("com.mirai.Main", "0.1").author("z0904").name("ba~ ka~ bot").info("笨比bot").build());
+        super(new JvmPluginDescriptionBuilder("com.baka.Main", "0.1").author("z9364").name("ba~ ka~ bot").info("一个自用qq bot").build());
     }
 
     @Override

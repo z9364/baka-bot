@@ -6,7 +6,7 @@ public class Constants {
 
     /* connect out time */
 
-    public static int CONNECT_OUT_TIME = 5000; // 3秒
+    public static int CONNECT_OUT_TIME = 5000; // 5秒
     /* 保存信息 */
     public static String SAVE_ROOT_PATH = "./data/download";
     public static String PIXIV_PATH = "/pixiv";
@@ -26,7 +26,7 @@ public class Constants {
 
     /* P站代理 */
     public static String ORG_PIXIV_PERFIX = "https://i.pximg.net/";
-    public static String PROXY_PIXIV_PERFIX = "https://pixiv.1159445878.workers.dev/";
+    public static String PROXY_PIXIV_PERFIX = "https://pixiv.1159445878.workers.dev/"; // 这个是cloudflare做的代理, 跟 https://i.pixiv.cat/ 是一样滴
     public static String PIXIV_CAT_PERFIX = "https://i.pixiv.cat/";
 
     /* 猫图 */

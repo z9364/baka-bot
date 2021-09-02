@@ -8,8 +8,10 @@
 
    ![图片](http://z9364.gitee.io/picture-bed/github/baka-bot/1.png)  
 
-3. 下载最新版本 [`mcl`](https://github.com/iTXTech/mirai-console-loader/releases) 解压，得到   
+3. 下载最新版本 [`mcl`](https://github.com/iTXTech/mirai-console-loader/releases) 解压，得到  
+   
    ![图片](http://z9364.gitee.io/picture-bed/github/baka-bot/2.8.png)  
+   
    在 `./config/Console/AutoLogin.yml` 中配置自动登录的账号密码，
    第一次登录可能需要验证，按照提示的来就行
 

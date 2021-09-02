@@ -52,8 +52,8 @@ public class ColorImage implements Subscribe {
                 List<MessageContent> messages = new ArrayList<>();
 
                 if (reg(regs, content)) {
-                    var num = "3";
-                    var tag = "";
+                    String num = "3";
+                    String tag = "";
 
                     if(content.startsWith("来")){
                         char c = content.charAt(1);

@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.21' // 版本必须为1.4及以上
+    id 'net.mamoe.mirai-console' version '2.4.0' // Mirai版本号
+}
+
+group 'com'
+version '1.0-SNAPSHOT'
+
+repositories {
+    // mavenCentral()
+    maven {
+        url 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    compile 'com.alibaba:fastjson:1.2.76'
+}
+
+test {
+    useJUnitPlatform()
+}

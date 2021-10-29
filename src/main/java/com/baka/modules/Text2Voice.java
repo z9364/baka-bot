@@ -6,7 +6,7 @@ import com.baka.utils.DownloadUtil;
 import com.baka.utils.MD5Utils;
 import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.Listener;
-import net.mamoe.mirai.event.events.GroupMessageEvent;
+import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.Voice;
 import net.mamoe.mirai.utils.ExternalResource;
 import net.mamoe.mirai.utils.MiraiLogger;
@@ -32,11 +32,11 @@ public class Text2Voice implements Subscribe {
     }
 
     Listener<?> listener;
-    private final List<String> regs = new ArrayList<>();
+    private List<String> regs = new ArrayList<>();
 
     @Override
     public void startListener() {
-        listener = GlobalEventChannel.INSTANCE.subscribeAlways(GroupMessageEvent.class, event -> {
+        listener = GlobalEventChannel.INSTANCE.subscribeAlways(MessageEvent.class, event -> {
             try {
                 String content = event.getMessage().contentToString();
                 // List<MessageContent> messages = new ArrayList<>();
@@ -44,9 +44,9 @@ public class Text2Voice implements Subscribe {
                     String text = content.substring(1);
                     if(text.length()>0) {
                         // 将语音文件用md5加密存储到本地，防止文件名过长
-                        String localpath = DownloadUtil.saveFile(Constants.BAIDU_YANYI + "?" + MD5Utils.md5(text) + ".mp3", "GET", "lan=zh&spd=5&source=web&text=" + text);
-                        // String localpath = "C:\\Users\\zeng\\Desktop\\tts.amr";
-                        ExternalResource externalResource = ExternalResource.create(new FileInputStream(localpath));
+                        String localPath = DownloadUtil.saveFile(Constants.BAIDU_YANYI + "?" + MD5Utils.md5(text) + ".mp3", "GET", "lan=zh&spd=5&source=web&text=" + text);
+                        // String localPath = "C:\\Users\\zeng\\Desktop\\tts.amr";
+                        ExternalResource externalResource = ExternalResource.create(new FileInputStream(localPath));
                         Voice voice = ExternalResource.uploadAsVoice(externalResource, event.getSubject());
                         externalResource.close();
 

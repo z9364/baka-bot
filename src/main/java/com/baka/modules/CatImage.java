@@ -34,7 +34,7 @@ public class CatImage implements Subscribe {
     }
 
     private Listener<?> listener;
-    private final List<String> regs = new ArrayList<>();
+    private List<String> regs = new ArrayList<>();
 
     @Override
     public void startListener() {

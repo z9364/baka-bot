@@ -26,9 +26,11 @@ public class ModuleManager {
         modules.put("猫图", "CatImage");
         modules.put("文本转语音", "Text2Voice");
         modules.put("能不能好好说话", "GoodGoodSay");
+        modules.put("人生重开", "Remake");
     }
 
-    private ModuleManager(){};
+    private ModuleManager(){}
+
     private static final ModuleManager INSTANCE = new ModuleManager();
 
     public static ModuleManager getInstance(){

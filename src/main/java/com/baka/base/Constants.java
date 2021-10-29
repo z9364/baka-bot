@@ -5,8 +5,8 @@ public class Constants {
     public static String OS_NAME = System.getProperty("os.name");
 
     /* connect out time */
-
     public static int CONNECT_OUT_TIME = 5000; // 5秒
+
     /* 保存信息 */
     public static String SAVE_ROOT_PATH = "./data/download";
     public static String PIXIV_PATH = "/pixiv";
@@ -19,7 +19,7 @@ public class Constants {
     public static String LOLICON_URL = "https://api.lolicon.app/setu/v2?R18=" + Constants.R18;
 
     /* pid查询 */
-    public static String PID_URL = "https://api.pixiv.cat/v1/generate";
+    public static String PID_URL = "https://pcat.1159445878.workers.dev/v1/generate";
 
     /* 壁纸 */
     public static String WALLPAPER_URL = "";
@@ -35,12 +35,15 @@ public class Constants {
 
     /* QQ小冰ID */
     public static Long LITTEL_ICE_ID = 2854196306L;
-    public static String LITTEL_ICE_NAME = "小冰";
+    public static String LITTEL_ICE_NAME = "涩批小冰";
 
     /* 百度翻译语音 */
     public static String BAIDU_YANYI = "https://fanyi.baidu.com/gettts";
 
     /* 能不能好好说话 */
     public static String NBNHHSH_API = "https://lab.magiconch.com/api/nbnhhsh/guess";
+
+    /* lifeRestart_path 人生重开项目路径 */
+    public static String LIFE_RESTART_PATH = "H:/Workspace/lifeRestart";
 
 }

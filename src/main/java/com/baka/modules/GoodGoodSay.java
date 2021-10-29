@@ -12,15 +12,20 @@ import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.PlainText;
 import net.mamoe.mirai.utils.MiraiLogger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GoodGoodSay implements Subscribe {
 
 
     static MiraiLogger logger = MiraiLogger.create(GoodGoodSay.class.getName());
 
     Listener<?> listener;
+    private List<String> regs = new ArrayList<>();
 
     private GoodGoodSay(){
-        // regs.add("猫图");
+        regs.add("好好说话\\s.*");
+        regs.add("hhsh\\s.*");
     }
 
     private static class GoodGoodSayHolder {
@@ -35,44 +40,42 @@ public class GoodGoodSay implements Subscribe {
     public void startListener() {
         listener = GlobalEventChannel.INSTANCE.subscribeAlways(MessageEvent.class, event -> {
 
-            String content = event.getMessage().contentToString().trim();
+            String content = event.getMessage().contentToString();
+            if(reg(regs, content)){
+                String temp = content.substring(5);
+                // 去除汉字和数字 将"，"换成","
+                String text = temp.replaceAll("[^\\w]+", "").replaceAll("[\\d]+", "").replaceAll("，", ",");
 
-            String text = content.replaceAll("[^\\w]+", ",");
-
-            if(text.equals(",")) { // 如果替换之后只剩下','说明没有字母
-                return;
-            }
-
-            if(text.startsWith(",")){
-                text = text.substring(1);
-            }
-
-            try {
-                StringBuilder msg = new StringBuilder(event.getSenderName()).append("语中的\n");
-                String json = IOUtil.readInputStream(DownloadUtil.openUrl(Constants.NBNHHSH_API, "POST", "text="+ text));
-                //System.out.println("json ==> " + json);
-                JSONArray result = JSONArray.parseArray(json);
-
-                if(result.isEmpty()){
+                if(text.isBlank()){
                     return;
                 }
 
-                for(Object obj : result){
-                    JSONObject jsonobj = (JSONObject) obj;
-                    msg.append(jsonobj.get("name")).append("可能是：\n");
-                    JSONArray array = jsonobj.getJSONArray("trans");
-                    for(Object o : array){
-                        msg.append(o.toString()).append("，");
+                try {
+                    String json = IOUtil.readInputStream(DownloadUtil.openUrl(Constants.NBNHHSH_API, "POST", "text="+ text));
+                    //System.out.println("json ==> " + json);
+                    JSONArray result = JSONArray.parseArray(json);
+
+                    if(result.isEmpty()){
+                        return;
                     }
-                    msg.append("\n");
+
+                    StringBuilder msg = new StringBuilder();
+                    for(Object obj : result){
+                        JSONObject jsonObj = (JSONObject) obj;
+                        msg.append(jsonObj.get("name")).append("可能是：");
+                        JSONArray array = jsonObj.getJSONArray("trans");
+                        for(Object o : array){
+                            msg.append(o.toString()).append("，");
+                        }
+                        msg.append("\n");
+                    }
+
+                    event.getSubject().sendMessage(new PlainText(msg.substring(0, msg.length()-2)));
+
+                } catch (Exception e) {
+                    logger.error(e.getMessage());
                 }
-
-                event.getSubject().sendMessage(new PlainText(msg));
-
-            } catch (Exception e) {
-                logger.error(e.getMessage());
             }
-
         });
     }
 

@@ -43,7 +43,7 @@ public class PidQuery implements Subscribe {
     }
 
     Listener<?> listener;
-    private final List<String> regs = new ArrayList<>();
+    private List<String> regs = new ArrayList<>();
 
     @Override
     public void startListener() {
@@ -56,13 +56,13 @@ public class PidQuery implements Subscribe {
                 String pid = content.substring(3);
                 Map<String, Object> map;
                 try {
-                    map = JSONUtil.io2json(DownloadUtil.openUrl(Constants.PID_URL, "POST", "p="+pid));
+                    map = JSONUtil.io2json(DownloadUtil.openUrl(Constants.PID_URL, "GET", "p="+pid));
                 } catch (Exception e) {
                     logger.error(e.getMessage());
                     return;
                 }
 
-                if(Boolean.getBoolean(map.get("success") + "")){
+                if(!Boolean.parseBoolean(String.valueOf(map.get("success")))){
                     event.getSubject().sendMessage(MessageUtil.bulidForwordedMessage("群聊的聊天记录", Arrays.asList(new PlainText(content), new PlainText("查询失败"))));
                     return;
                 }

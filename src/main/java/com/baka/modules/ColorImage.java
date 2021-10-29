@@ -43,7 +43,7 @@ public class ColorImage implements Subscribe {
     }
 
     Listener<?> listener;
-    private final List<String> regs = new ArrayList<>();
+    private List<String> regs = new ArrayList<>();
 
     @Override
     public void startListener(){

@@ -2,6 +2,7 @@ package com.baka.utils;
 
 import com.baka.base.Constants;
 import net.mamoe.mirai.utils.MiraiLogger;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,7 +17,7 @@ public class DownloadUtil {
     static MiraiLogger logger = MiraiLogger.create(DownloadUtil.class.getName());
 
     public static void init() {
-        logger.info("初始化个der...");
+        //logger.info("初始化个der...");
     }
 //
 //    public static InputStream openUrl(String url, String method) throws Exception{
@@ -43,7 +44,13 @@ public class DownloadUtil {
 //        return inputStream;
 //    }
 
-    public static InputStream openUrl(String url, String method, String param) throws Exception{
+    public static InputStream openUrl(@NotNull String url, @NotNull String method, @NotNull String param) throws Exception{
+
+        if(param.length() > 0 && "GET".equalsIgnoreCase(method)){
+            url += "?";
+            url += param;
+        }
+
         URL uri = new URL(url);
         HttpURLConnection connection = (HttpURLConnection) uri.openConnection();
 
@@ -55,7 +62,7 @@ public class DownloadUtil {
         connection.setDoInput(true);
 
         // 请求参数
-        if(param.length() > 0){
+        if(param.length() > 0 && "POST".equalsIgnoreCase(method)){
             OutputStream outStream = connection.getOutputStream();
             outStream.write(param.getBytes(StandardCharsets.UTF_8));
             outStream.flush();

@@ -13,6 +13,8 @@ public class Constants {
     public static String CAT_PATH = "/cat";
     public static String WALLPAPER_PATH = "/wallpaper";
     public static String VOICE_PATH = "/voice";
+    public static String MEME_PATH = "./data/meme";
+
 
     /* 涩图 */
     public static String R18 = "2"; // 0-->关闭，1-->开启，2-->混合

@@ -27,4 +27,12 @@ public class MessageUtil {
         return new ForwardMessage(Collections.singletonList("很多消息..."), title, "", "", "查看" + messages.size() + "条消息", nodes);
     }
 
+    public static ForwardMessage bulidForwordedMessage(String title, MessageContent message){
+
+        List<ForwardMessage.Node> nodes = new ArrayList<>();
+        nodes.add(new ForwardMessage.Node(Constants.LITTEL_ICE_ID, Long.valueOf(new Date().getTime() / 1000).intValue(), Constants.LITTEL_ICE_NAME, message));
+        // 第 2,3 个参数不知道干啥的...
+        return new ForwardMessage(Collections.singletonList("很多消息..."), title, "", "", "查看1条消息", nodes);
+    }
+
 }

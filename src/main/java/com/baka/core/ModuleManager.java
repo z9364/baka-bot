@@ -1,7 +1,9 @@
 package com.baka.core;
 
+import com.baka.utils.MessageUtil;
 import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.events.MessageEvent;
+import net.mamoe.mirai.message.data.PlainText;
 import net.mamoe.mirai.utils.MiraiLogger;
 
 import java.lang.reflect.Method;
@@ -18,6 +20,7 @@ public class ModuleManager {
     private final String modulePackage = "com.baka.modules.";
 
     private static final Map<String, String> modules = new HashMap<>(); // 全部模块
+    private static final StringBuilder allModules = new StringBuilder();
 
     static {
         // 初始化模块
@@ -26,7 +29,8 @@ public class ModuleManager {
         modules.put("猫图", "CatImage");
         modules.put("文本转语音", "Text2Voice");
         modules.put("能不能好好说话", "GoodGoodSay");
-        modules.put("人生重开", "Remake");
+        modules.put("表情包", "Meme");
+        //modules.put("人生重开", "Remake");
     }
 
     private ModuleManager(){}
@@ -45,6 +49,7 @@ public class ModuleManager {
                 Object o = clazz.getDeclaredMethod("getInstance").invoke(new Object());
                 method.invoke(o);
                 logger.info("模块" + module + "启用成功！");
+                allModules.append(module).append("\n");
             }
         }catch (Exception e){
             logger.info("模块初始化失败！");
@@ -58,7 +63,7 @@ public class ModuleManager {
         logger.info("模块" + moduleName + "加载成功！");
     }
 
-    public boolean onable(String moduleName){
+    public boolean enable(String moduleName){
         try {
             Class<?> clazz = Class.forName(modulePackage + moduleName);
             Method method = clazz.getDeclaredMethod("startListener");
@@ -94,7 +99,7 @@ public class ModuleManager {
             if(content.startsWith("启用")) {
                 String moduleName = content.split(" ")[1];
                 if (modules.containsKey(moduleName)) {
-                    if (onable(modules.get(moduleName))) {
+                    if (enable(modules.get(moduleName))) {
                         event.getSubject().sendMessage("启用" + moduleName + "成功！");
                     } else {
                         event.getSubject().sendMessage("启用" + moduleName + "失败！");
@@ -116,6 +121,8 @@ public class ModuleManager {
             }else if(content.startsWith("加载")){
                 String moduleName = content.split(" ")[1];
                 load(moduleName);
+            }else if(content.equals("全部功能")){
+                event.getSubject().sendMessage(MessageUtil.bulidForwordedMessage("全部功能", new PlainText(allModules.toString())));
             }
         });
     }

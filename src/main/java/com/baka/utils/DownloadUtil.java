@@ -95,8 +95,8 @@ public class DownloadUtil {
         }else if(url.contains("fox")){ // 猫图
             savePath += Constants.CAT_PATH + fileName;
         }else if(url.contains("fanyi")){
-            fileName = url.substring(url.lastIndexOf("?")).replace("?", "/");
-            savePath += Constants.VOICE_PATH + fileName;
+            fileName = MD5Utils.md5(param.split("text=")[1]) + ".mp3";
+            savePath += Constants.VOICE_PATH + "/" + fileName;
         }
 
         File file = new File(savePath);

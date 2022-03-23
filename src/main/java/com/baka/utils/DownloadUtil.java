@@ -126,4 +126,32 @@ public class DownloadUtil {
         return savePath;
     }
 
+    public static String saveFile(String url, String method, String param, String savePath) throws Exception{
+        File file = new File(savePath);
+        if(file.exists()){
+            logger.info("文件已存在 ==> " + savePath);
+            return savePath;
+        }
+
+        String dirPath = savePath.substring(0, savePath.lastIndexOf("/"));
+        File dir = new File(dirPath);
+        if(!dir.exists()){
+            boolean flag = dir.mkdir();
+            if (flag)
+                logger.info("创建目录：" + dirPath);
+        }
+
+        InputStream inputStream = openUrl(url, method, param);
+
+        FileOutputStream outputStream = new FileOutputStream(file);
+        int len;
+        byte[] bytes = new byte[2048];
+        while ((len = inputStream.read(bytes)) != -1) {
+            outputStream.write(bytes, 0, len);
+        }
+        inputStream.close();
+        logger.info("文件保存至 ==> " + savePath);
+        return savePath;
+    }
+
 }

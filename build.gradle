@@ -18,6 +18,8 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     compile 'com.alibaba:fastjson:1.2.76'
+    // https://mvnrepository.com/artifact/com.github.binarywang/qrcode-utils
+    implementation group: 'com.github.binarywang', name: 'qrcode-utils', version: '1.2'
 }
 
 test {

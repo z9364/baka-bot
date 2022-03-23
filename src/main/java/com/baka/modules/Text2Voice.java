@@ -3,12 +3,9 @@ package com.baka.modules;
 import com.baka.base.Constants;
 import com.baka.base.Subscribe;
 import com.baka.utils.DownloadUtil;
-import io.ktor.http.ContentType;
-import net.mamoe.mirai.contact.AudioSupported;
 import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.Listener;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
-import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.Audio;
 import net.mamoe.mirai.utils.ExternalResource;
 import net.mamoe.mirai.utils.MiraiLogger;
@@ -24,7 +21,7 @@ public class Text2Voice implements Subscribe {
     static MiraiLogger logger = MiraiLogger.create(Text2Voice.class.getName());
 
     private Text2Voice(){
-        regs.add("说.*");
+        regs.add("say.*");
     }
 
     private static class Text2VoiceHolder {

@@ -2,7 +2,6 @@ package com.baka.modules;
 
 import com.baka.base.Constants;
 import com.baka.base.Subscribe;
-import com.baka.utils.DownloadUtil;
 import com.baka.utils.MemeUtil;
 import com.baka.utils.MessageUtil;
 import net.mamoe.mirai.event.GlobalEventChannel;
@@ -94,26 +93,6 @@ public class Meme implements Subscribe{
                         event.getSubject().sendMessage(image);
                         break;
                 }
-
-//                if("表情包列表".equals(content)){
-//                    StringBuilder b = new StringBuilder();
-//                    for(String s : memes.keySet()){
-//                        b.append(s).append("\n");
-//                    }
-//                    event.getSubject().sendMessage(MessageUtil.bulidForwordedMessage("表情包", new PlainText(b.toString())));
-//                }else{
-//                    String localPath = memes.get(content.split("\\.")[0]);
-//                    Image image = null;
-//                    try {
-//                        ExternalResource externalResource = ExternalResource.create(new FileInputStream(localPath));
-//                        image = event.getSubject().uploadImage(externalResource);
-//                        externalResource.close();
-//                    }catch (Exception e){
-//                        e.printStackTrace();
-//                    }
-//                    assert image != null;
-//                    event.getSubject().sendMessage(image);
-//                }
             }
         });
     }

@@ -30,6 +30,7 @@ public class ModuleManager {
         modules.put("文本转语音", "Text2Voice");
         modules.put("能不能好好说话", "GoodGoodSay");
         modules.put("表情包", "Meme");
+        modules.put("二维码识别/生成", "QRCode");
         //modules.put("人生重开", "Remake");
     }
 

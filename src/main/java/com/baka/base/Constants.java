@@ -1,5 +1,9 @@
 package com.baka.base;
 
+import com.github.binarywang.utils.qrcode.MatrixToLogoImageConfig;
+
+import java.awt.*;
+
 public class Constants {
 
     public static String OS_NAME = System.getProperty("os.name");
@@ -15,6 +19,8 @@ public class Constants {
     public static String VOICE_PATH = "/voice";
     public static String MEME_PATH = "./data/meme";
 
+    /* 二维码临时存放目录 */
+    public static String QRCODE_TEMP_PATH = "./data/QRCode/temp";
 
     /* 涩图 */
     public static String R18 = "2"; // 0-->关闭，1-->开启，2-->混合
